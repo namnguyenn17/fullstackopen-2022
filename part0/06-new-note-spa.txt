@@ -1,0 +1,25 @@
+note over browser:
+Browser execute the event handler 
+when button is clicked. Create new note 
+and put to note list. Then send it as a JSON
+to server 
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over server:
+server responds with status code 302
+it contains a new note JSON-data 
+and asks browser to do a new HTTP GET
+end note
+
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server-->browser: HTML-status code 201
+
+
+note over browser:
+browser does not reload
+and stay it the same like we
+do not execute
+end note
