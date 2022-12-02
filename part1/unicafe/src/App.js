@@ -6,28 +6,36 @@ const Button = ({ handleClick, text }) => (
 
 const Statistics = ({ good, neutral, bad }) => {
   const all = good + neutral + bad
+  const average = all > 0 ? roundToTwo((good - bad) / all) : 0
+  const positive = all > 0 ? roundToTwo((good / all) * 100) : 0
 
   if (all === 0) {
     return <div>No feedback given</div>
   }
 
   return (
-    <div>
-      <StatisticLine text="good" value={good} />
-      <StatisticLine text="neutral" value={neutral} />
-      <StatisticLine text="bad" value={bad} />
-      <StatisticLine text="all" value={all} />
-      <StatisticLine text="average" value={(good - bad) / all} />
-      <StatisticLine text="positive" value={(good / all) * 100} />
-    </div>
+    <table>
+      <tbody>
+        <StatisticLine text="good" value={good} />
+        <StatisticLine text="neutral" value={neutral} />
+        <StatisticLine text="bad" value={bad} />
+        <StatisticLine text="all" value={all} />
+        <StatisticLine text="average" value={average} />
+        <StatisticLine text="positive" value={positive + ' %'} />
+      </tbody>
+    </table>
   )
 }
 
 const StatisticLine = ({ text, value }) => (
-  <div>
-    {text} {value}{' '}
-  </div>
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
 )
+
+// Round to two decimal places
+const roundToTwo = (num) => Math.round(num * 100 + Number.EPSILON) / 100
 
 const App = () => {
   // save clicks of each button to its own state
