@@ -25,17 +25,7 @@ const App = () => {
     setPoints(pointsCopy)
   }
 
-  const findBestAnecdote = () => {
-    const max = Math.max(...points)
-    const index = points.indexOf(max)
-
-    const bestAnecdote = {
-      text: anecdotes[index],
-      votes: max,
-    }
-    console.log(bestAnecdote)
-    return bestAnecdote
-  }
+  const bestAnecdote = points.indexOf(Math.max(...points))
 
   return (
     <div>
@@ -51,8 +41,8 @@ const App = () => {
       />
 
       <h1>Anecdote with most votes</h1>
-      <div>{findBestAnecdote().text}</div>
-      <div>has {findBestAnecdote().votes} votes</div>
+      <div>{anecdotes[bestAnecdote]}</div>
+      <div>has {points[bestAnecdote]} votes</div>
     </div>
   )
 }
